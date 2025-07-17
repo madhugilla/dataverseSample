@@ -59,31 +59,15 @@ dotnet run
 
 To use this sample, you'll need to register an application in Azure AD with the following permissions:
 
-- **Dynamics CRM** → **user_impersonation** (delegated permission)
+### Required API Permissions:
 
-Make sure to:
-- Generate a client secret
-- Add the appropriate redirect URIs if needed
-- Grant admin consent for the permissions
+1. **Dynamics CRM**
+   - **user_impersonation** (Delegated permission)
+   - Description: Access Common Data Service as organization users
 
-## Security Notes
-
-- Never commit secrets or connection strings to source control
-- Use .NET User Secrets for local development
-- Use Azure Key Vault or similar for production environments
-- Follow the principle of least privilege when setting up Azure AD permissions
-
-## Project Structure
-
-```
-dataverseSample/
-├── DataVerseCRUDOperations/
-│   ├── Program.cs                    # Main application logic
-│   └── DataVerseCRUDOperations.csproj # Project file
-├── dataverseSample.sln               # Solution file
-├── .gitignore                        # Git ignore rules
-└── README.md                         # This file
-```
+2. **Microsoft Graph** 
+   - **User.Read** (Delegated permission)
+   - Description: Sign in and read user profile
 
 ## Dependencies
 
