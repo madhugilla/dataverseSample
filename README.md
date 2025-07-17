@@ -69,6 +69,30 @@ To use this sample, you'll need to register an application in Azure AD with the 
    - **User.Read** (Delegated permission)
    - Description: Sign in and read user profile
 
+### Configure Application User in PowerApps Admin Center
+
+After creating the Azure AD app registration, you need to add it as an application user in your Dataverse environment:
+
+1. **Go to PowerApps Admin Center**
+   - Navigate to [PowerApps Admin Center](https://admin.powerplatform.microsoft.com/)
+
+2. **Select Your Environment**
+   - Choose the environment where you want to use the application
+
+3. **Access User Settings**
+   - In the environment details, go to **Settings**
+   - Navigate to **Users + permissions**
+   - Select **Application users**
+
+4. **Create New Application User**
+   - Click the **+ New app user** button
+   - Click **+ Add an app** button
+   - Select the app registration you created earlier
+   - Assign appropriate security roles (e.g., System Administrator for testing)
+   - Click **Create**
+
+> **Note**: The application user needs appropriate security roles to perform CRUD operations on the entities you want to work with.
+
 ## Dependencies
 
 - **Microsoft.PowerPlatform.Dataverse.Client** - Main SDK for Dataverse operations
