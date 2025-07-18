@@ -1,17 +1,39 @@
 # Dataverse CRUD Operations Sample
 
-This is a .NET console application that demonstrates basic CRUD (Create, Read, Update, Delete) operations with Microsoft Dataverse using the PowerPlatform.Dataverse.Client SDK.
+This is a .NET console application that demonstrates both **late bound** and **early bound** CRUD (Create, Read, Update, Delete) operations with Microsoft Dataverse using the PowerPlatform.Dataverse.Client SDK.
+
+## 🆕 Early Bound Implementation
+
+This project now includes a comprehensive **early bound implementation** with:
+
+- ✅ **Type-safe entities** with strongly-typed properties
+- ✅ **Generic repository pattern** for any entity type
+- ✅ **Clean architecture** with separation of concerns
+- ✅ **Comprehensive unit tests** (51 tests with mocking)
+- ✅ **Integration tests** for end-to-end validation
+- ✅ **Best practices** implementation
+
+👉 **[See the Early Bound Implementation Guide](EARLY_BOUND_README.md)** for detailed documentation.
 
 ## Features
 
+### Late Bound (Original Implementation)
 - **Authentication**: Uses client secret authentication with Azure AD
 - **CRUD Operations**: Demonstrates creating, reading, updating, and deleting Account records
 - **Query Operations**: Shows how to query multiple records using QueryExpression
 - **Configuration**: Uses .NET User Secrets to securely store connection information
 
+### Early Bound (New Implementation)
+- **Type Safety**: Strongly-typed entities replace string-based operations
+- **Generic Repository**: Works with any entity type through generics
+- **Service Layer**: Business logic separation with validation
+- **Async/Await**: Modern asynchronous programming patterns
+- **Comprehensive Testing**: Unit and integration tests
+- **Clean Architecture**: SOLID principles and dependency injection ready
+
 ## Prerequisites
 
-- .NET 9.0 or later
+- .NET 8.0 or later
 - Access to a Microsoft Dataverse environment
 - Azure AD app registration with appropriate permissions
 
@@ -41,19 +63,34 @@ This is a .NET console application that demonstrates basic CRUD (Create, Read, U
 
 ## Running the Application
 
+### Early Bound Implementation (Recommended)
 ```bash
 cd DataVerseCRUDOperations
 dotnet run
 ```
 
-## What the Application Does
-
+The early bound implementation demonstrates:
 1. **Connects to Dataverse** using client secret authentication
-2. **Creates** a new Account record
-3. **Retrieves** the created record by ID
-4. **Updates** the record name
-5. **Queries** for multiple records using criteria
-6. **Deletes** the created record
+2. **Creates** Account and Contact records using strongly-typed entities
+3. **Retrieves** records with type safety
+4. **Updates** records with validation
+5. **Queries** for multiple records using advanced search
+6. **Deletes** records with proper cleanup
+
+### Running Tests
+```bash
+# Run all tests (unit + integration)
+dotnet test
+
+# Run only unit tests
+dotnet test --filter "FullyQualifiedName~Unit"
+
+# Run integration tests (requires Dataverse configuration)
+dotnet test --filter "FullyQualifiedName~Integration"
+```
+
+### Late Bound Implementation (Legacy)
+The original late bound implementation is preserved in the code comments for reference.
 
 ## Azure AD App Registration
 
@@ -97,6 +134,8 @@ After creating the Azure AD app registration, you need to add it as an applicati
 
 - **Microsoft.PowerPlatform.Dataverse.Client** - Main SDK for Dataverse operations
 - **Microsoft.Extensions.Configuration.UserSecrets** - For secure configuration management
+- **xunit** - Testing framework for unit and integration tests
+- **Moq** - Mocking framework for unit tests
 
 ## License
 
