@@ -6,7 +6,7 @@ using Microsoft.PowerPlatform.Dataverse.Client;
 using Microsoft.Xrm.Sdk;
 using Xunit;
 
-namespace DataVerseCRUDOperations.Tests.Integration;
+namespace DataVerseCRUDOperations.IntegrationTests;
 
 /// <summary>
 /// Integration tests for the early bound implementation.

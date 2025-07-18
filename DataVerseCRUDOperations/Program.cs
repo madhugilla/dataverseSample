@@ -9,7 +9,7 @@ using DataVerseCRUDOperations.Entities;
 using DataVerseCRUDOperations.Repositories;
 using DataVerseCRUDOperations.Services;
 
-class Program
+public class Program
 {
     // TODO Enter your Dataverse environment's URL and logon info.
     static string url = "https://yourorg.crm.dynamics.com";

@@ -2,7 +2,7 @@ using DataVerseCRUDOperations.Entities;
 using Microsoft.Xrm.Sdk;
 using Xunit;
 
-namespace DataVerseCRUDOperations.Tests.Unit.Entities;
+namespace DataVerseCRUDOperations.UnitTests.Entities;
 
 /// <summary>
 /// Unit tests for the Account early bound entity.

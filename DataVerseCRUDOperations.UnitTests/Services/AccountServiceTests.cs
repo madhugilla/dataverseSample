@@ -5,7 +5,7 @@ using Microsoft.Xrm.Sdk.Query;
 using Moq;
 using Xunit;
 
-namespace DataVerseCRUDOperations.Tests.Unit.Services;
+namespace DataVerseCRUDOperations.UnitTests.Services;
 
 /// <summary>
 /// Unit tests for the AccountService class.

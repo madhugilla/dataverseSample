@@ -5,7 +5,7 @@ using Microsoft.Xrm.Sdk.Query;
 using Moq;
 using Xunit;
 
-namespace DataVerseCRUDOperations.Tests.Unit.Repositories;
+namespace DataVerseCRUDOperations.UnitTests.Repositories;
 
 /// <summary>
 /// Unit tests for the DataverseRepository class.
