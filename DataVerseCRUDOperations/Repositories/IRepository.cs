@@ -1,4 +1,6 @@
 using DataVerseCRUDOperations.Entities;
+using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 
 namespace DataVerseCRUDOperations.Repositories;
@@ -62,4 +64,11 @@ public interface IRepository<T> where T : IDataverseEntity, new()
     /// <param name="id">The ID of the entity to check.</param>
     /// <returns>True if the entity exists, false otherwise.</returns>
     Task<bool> ExistsAsync(Guid id);
+    
+    /// <summary>
+    /// Executes multiple operations in a single transaction.
+    /// </summary>
+    /// <param name="requests">The collection of organization requests to execute.</param>
+    /// <returns>The responses from the executed requests.</returns>
+    Task<ExecuteTransactionResponse> ExecuteTransactionAsync(IEnumerable<OrganizationRequest> requests);
 }

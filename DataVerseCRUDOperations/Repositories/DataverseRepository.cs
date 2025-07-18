@@ -1,5 +1,6 @@
 using DataVerseCRUDOperations.Entities;
 using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 
 namespace DataVerseCRUDOperations.Repositories;
@@ -170,5 +171,32 @@ public class DataverseRepository<T> : IRepository<T> where T : IDataverseEntity,
         {
             return false;
         }
+    }
+    
+    /// <summary>
+    /// Executes multiple operations in a single transaction.
+    /// </summary>
+    /// <param name="requests">The collection of organization requests to execute.</param>
+    /// <returns>The responses from the executed requests.</returns>
+    public async Task<ExecuteTransactionResponse> ExecuteTransactionAsync(IEnumerable<OrganizationRequest> requests)
+    {
+        if (requests == null)
+            throw new ArgumentNullException(nameof(requests));
+
+        var requestList = requests.ToList();
+        if (!requestList.Any())
+            throw new ArgumentException("At least one request is required", nameof(requests));
+
+        var transactionRequest = new ExecuteTransactionRequest
+        {
+            Requests = new OrganizationRequestCollection()
+        };
+
+        foreach (var request in requestList)
+        {
+            transactionRequest.Requests.Add(request);
+        }
+
+        return await Task.Run(() => (ExecuteTransactionResponse)_organizationService.Execute(transactionRequest));
     }
 }
