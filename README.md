@@ -7,6 +7,10 @@ This is a .NET console application that demonstrates basic CRUD (Create, Read, U
 - **Authentication**: Uses client secret authentication with Azure AD
 - **CRUD Operations**: Demonstrates creating, reading, updating, and deleting Account records
 - **Query Operations**: Shows how to query multiple records using QueryExpression
+- **Lookup Operations**: Comprehensive demonstration of handling lookup relationships:
+  - **Push Operations**: Creating and updating records with lookup references
+  - **Pull Operations**: Retrieving and querying data across related entities
+  - **Advanced Scenarios**: Complex joins, lookup validation, and error handling
 - **Configuration**: Uses .NET User Secrets to securely store connection information
 
 ## Prerequisites
@@ -53,7 +57,14 @@ dotnet run
 3. **Retrieves** the created record by ID
 4. **Updates** the record name
 5. **Queries** for multiple records using criteria
-6. **Deletes** the created record
+6. **Demonstrates Lookup Operations** including:
+   - Creating records with lookup relationships (Contact → Account)
+   - Updating lookup fields to point to different records
+   - Retrieving records with expanded lookup data
+   - Querying records using lookup filters
+   - Complex queries with joins across multiple related entities
+   - Lookup validation and error handling
+7. **Deletes** the created records
 
 ## Azure AD App Registration
 
@@ -97,6 +108,59 @@ After creating the Azure AD app registration, you need to add it as an applicati
 
 - **Microsoft.PowerPlatform.Dataverse.Client** - Main SDK for Dataverse operations
 - **Microsoft.Extensions.Configuration.UserSecrets** - For secure configuration management
+
+## Lookup Operations Details
+
+The application demonstrates comprehensive lookup handling scenarios that are commonly needed when working with Dataverse:
+
+### Push Operations (Creating/Updating with Lookups)
+
+1. **Creating Records with Lookups**
+   ```csharp
+   Entity contact = new Entity("contact");
+   contact["firstname"] = "John";
+   contact["lastname"] = "Doe";
+   // Set lookup to an Account
+   contact["parentcustomerid"] = new EntityReference("account", accountId);
+   Guid contactId = service.Create(contact);
+   ```
+
+2. **Updating Lookup Fields**
+   ```csharp
+   Entity updateContact = new Entity("contact", contactId);
+   updateContact["parentcustomerid"] = new EntityReference("account", newAccountId);
+   service.Update(updateContact);
+   ```
+
+### Pull Operations (Retrieving/Querying with Lookups)
+
+1. **Retrieving with Lookup References**
+   ```csharp
+   Entity contact = service.Retrieve("contact", contactId, new ColumnSet("firstname", "parentcustomerid"));
+   EntityReference accountRef = contact.GetAttributeValue<EntityReference>("parentcustomerid");
+   ```
+
+2. **Querying with Joined Data**
+   ```csharp
+   QueryExpression query = new QueryExpression("contact");
+   LinkEntity accountLink = new LinkEntity("contact", "account", "parentcustomerid", "accountid", JoinOperator.LeftOuter);
+   accountLink.EntityAlias = "parentaccount";
+   query.LinkEntities.Add(accountLink);
+   ```
+
+3. **Filtering by Lookup Values**
+   ```csharp
+   query.Criteria.AddCondition("parentcustomerid", ConditionOperator.Equal, accountId);
+   ```
+
+### Advanced Scenarios
+
+- **Complex Multi-Entity Joins**: Demonstrates querying across Contact → Account → Opportunity relationships
+- **Lookup Validation**: Shows how to validate EntityReference objects before use
+- **Error Handling**: Proper handling of invalid lookup references
+- **Clearing Lookups**: How to set lookup fields to null/empty
+
+These patterns can be applied to any lookup relationship in Dataverse, making this a comprehensive reference for handling related data operations.
 
 ## License
 
