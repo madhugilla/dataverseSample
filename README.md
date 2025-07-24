@@ -1,6 +1,6 @@
 # Dataverse CRUD Operations Sample
 
-This is a .NET console application that demonstrates basic CRUD (Create, Read, Update, Delete) operations with Microsoft Dataverse using the PowerPlatform.Dataverse.Client SDK.
+ a .NET console application that demonstrates basic CRUD (Create, Read, Update, Delete)  using the PowerPlatform.Dataverse.Client SDK.
 
 ## Features
 
@@ -11,7 +11,6 @@ This is a .NET console application that demonstrates basic CRUD (Create, Read, U
 
 ## Prerequisites
 
-- .NET 9.0 or later
 - Access to a Microsoft Dataverse environment
 - Azure AD app registration with appropriate permissions
 
@@ -32,19 +31,6 @@ This is a .NET console application that demonstrates basic CRUD (Create, Read, U
    dotnet user-secrets set "Dataverse:ClientId" "your-client-id"
    dotnet user-secrets set "Dataverse:ClientSecret" "your-client-secret"
    ```
-
-3. **Restore packages and build**
-   ```bash
-   dotnet restore
-   dotnet build
-   ```
-
-## Running the Application
-
-```bash
-cd DataVerseCRUDOperations
-dotnet run
-```
 
 ## What the Application Does
 
@@ -90,14 +76,3 @@ After creating the Azure AD app registration, you need to add it as an applicati
    - Select the app registration you created earlier
    - Assign appropriate security roles (e.g., System Administrator for testing)
    - Click **Create**
-
-> **Note**: The application user needs appropriate security roles to perform CRUD operations on the entities you want to work with.
-
-## Dependencies
-
-- **Microsoft.PowerPlatform.Dataverse.Client** - Main SDK for Dataverse operations
-- **Microsoft.Extensions.Configuration.UserSecrets** - For secure configuration management
-
-## License
-
-This project is provided as a sample for educational purposes.
