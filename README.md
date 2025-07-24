@@ -16,13 +16,7 @@
 
 ## Setup
 
-1. **Clone the repository**
-   ```bash
-   git clone <your-repo-url>
-   cd dataverseSample
-   ```
-
-2. **Configure User Secrets**
+1. **Configure User Secrets**
    
    Set up your Dataverse connection information using the .NET user secrets tool:
    ```bash
