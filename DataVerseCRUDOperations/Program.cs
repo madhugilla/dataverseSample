@@ -49,6 +49,9 @@ class Program
 
         IOrganizationService service = serviceClient;  // use the interface for operations
 
+        Console.WriteLine($"SalesLTProducts count: {GetSalesLTProductsCount(service)}");
+        return;
+
         var response = (WhoAmIResponse)service.Execute(new WhoAmIRequest());
 
         Console.WriteLine($"User ID is {response.UserId}.");
@@ -87,17 +90,15 @@ class Program
         service.Delete("account", accountId);
         Console.WriteLine("Account deleted.");
 
-        // // 7. **Trigger a workflow**  
-        // // If there is an on-demand workflow (or a custom action) in Dataverse you want to execute:
-        // Guid workflowId = new Guid("<WORKFLOW_GUID>");   // ID of the workflow (GUID from your Dataverse environment)
-        // var wfRequest = new ExecuteWorkflowRequest
-        // {
-        //     WorkflowId = workflowId,
-        //     EntityId = accountId  // the target record on which to execute the workflow
-        // };
-        // var wfResponse = (ExecuteWorkflowResponse)service.Execute(wfRequest);
-        // Console.WriteLine("Workflow executed. Async Job Id: " + wfResponse.Id);
-
+    }
+    static int GetSalesLTProductsCount(IOrganizationService service)
+    {
+        var query = new QueryExpression("cr493_salesltproduct")
+        {
+            ColumnSet = new ColumnSet(false) // No columns needed, just count
+        };
+        var results = service.RetrieveMultiple(query);
+        return results.Entities.Count;
     }
 
     private static void GetConfig(out string url, out string clientId, out string clientSecret)
