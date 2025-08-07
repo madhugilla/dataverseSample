@@ -47,7 +47,7 @@ class Program
         // Initialize the ServiceClient (implements IOrganizationService)
         ServiceClient serviceClient = new ServiceClient(connectionString);
 
-        IOrganizationService service = serviceClient;  // use the interface for operations
+        IOrganizationService service = serviceClient;  // interface for operations
 
         Console.WriteLine($"SalesLTProducts count: {GetSalesLTProductsCount(service)}");
         return;
@@ -89,6 +89,18 @@ class Program
         // 6. **Delete the record (CRUD - Delete)**  
         service.Delete("account", accountId);
         Console.WriteLine("Account deleted.");
+
+           // // 7. **Trigger a workflow**  
+        // // If there is an on-demand workflow (or a custom action) in Dataverse you want to execute:
+        // Guid workflowId = new Guid("<WORKFLOW_GUID>");   // ID of the workflow (GUID from your Dataverse environment)
+        // var wfRequest = new ExecuteWorkflowRequest
+        // {
+        //     WorkflowId = workflowId,
+        //     EntityId = accountId  // the target record on which to execute the workflow
+        // };
+        // var wfResponse = (ExecuteWorkflowResponse)service.Execute(wfRequest);
+        // Console.WriteLine("Workflow executed. Async Job Id: " + wfResponse.Id);
+
 
     }
     static int GetSalesLTProductsCount(IOrganizationService service)
